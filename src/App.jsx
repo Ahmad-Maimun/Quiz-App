@@ -1,9 +1,12 @@
-function App() {
+import React from "react";
+import Quiz from "./components/quiz/Quiz";
+
+const App = () => {
   return (
     <>
-      <h1>{"<Hello World />"}</h1>
+      <Quiz />
     </>
   );
-}
+};
 
 export default App;
