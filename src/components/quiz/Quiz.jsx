@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { data } from "../../assets/data";
 import "./Quiz.css";
 
@@ -6,6 +6,13 @@ const Quiz = () => {
   const [index, setIndex] = useState(0);
   const [questions, setQuestions] = useState(data[index]);
   const [lock, setLock] = useState(false);
+
+  const option1 = useRef(null);
+  const option2 = useRef(null);
+  const option3 = useRef(null);
+  const option4 = useRef(null);
+
+  const optionArr = [option1, option2, option3, option4];
 
   const checkAns = (e, ans) => {
     if (lock === false) {
@@ -15,6 +22,7 @@ const Quiz = () => {
       } else {
         e.target.classList.add("wrong");
         setLock(true);
+        optionArr[questions.ans - 1].current.classList.add("correct");
       }
     }
   };
@@ -28,24 +36,28 @@ const Quiz = () => {
       </h2>
       <ul>
         <li
+          ref={option1}
           onClick={(e) => checkAns(e, 1)}
           className="flex items-center h-[70px] pl-[15px] border border-[#686868] rounded-[8px] mb-[20px] text-[20px] cursor-pointer"
         >
           {questions.option1}
         </li>
         <li
+          ref={option2}
           onClick={(e) => checkAns(e, 2)}
           className="flex items-center h-[70px] pl-[15px] border border-[#686868] rounded-[8px] mb-[20px] text-[20px] cursor-pointer"
         >
           {questions.option2}
         </li>
         <li
+          ref={option3}
           onClick={(e) => checkAns(e, 3)}
           className="flex items-center h-[70px] pl-[15px] border border-[#686868] rounded-[8px] mb-[20px] text-[20px] cursor-pointer"
         >
           {questions.option3}
         </li>
         <li
+          ref={option4}
           onClick={(e) => checkAns(e, 4)}
           className="flex items-center h-[70px] pl-[15px] border border-[#686868] rounded-[8px] mb-[20px] text-[20px] cursor-pointer"
         >
